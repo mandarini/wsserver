@@ -1,28 +1,30 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+'use strict';
+
+const express = require('express');
+const socketIO = require('socket.io');
+const path = require('path');
+
+const PORT = 5000;
+const INDEX = path.join(__dirname, 'index.html');
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+const io = socketIO(server);
 
 io.on('connection', (socket) => {
+  console.log('Client connected');
+  socket.on('disconnect', () => console.log('Client disconnected'));
 
-  // Log whenever a user connects
-  console.log('user connected');
+  /**
+  *    When we receive a 'message' event from our client, print out
+  *   the contents of that message and then echo it back to our client
+  *   using `io.emit()`
+  */
 
-  // Log whenever a client disconnects from our websocket server
-  socket.on('disconnect', function () {
-    console.log('user disconnected');
-  });
-
-  // When we receive a 'message' event from our client, print out
-  // the contents of that message and then echo it back to our client
-  // using `io.emit()`
   socket.on('message', (message) => {
       console.log("Message Received: " + message);
       io.emit('message', {type: 'new-message', text: message});
   });
-
-});
-
-// Initialize our websocket server on port 5000
-http.listen(5000, () => {
-  console.log('started on port 5000');
 });
