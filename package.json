@@ -1,23 +1,36 @@
 {
-  "name": "socketServer",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "engines": {
-    "node": "9.2.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "4.16.3",
-    "socket.io": "2.1.0"
-  },
-  "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.3.0"
-  }
+    "name": "socketServer",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mandarini/wsserver.git"
+    },
+    "engines": {
+        "node": "9.2.0"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "4.16.3",
+        "socket.io": "2.1.0"
+    },
+    "devDependencies": {
+        "@google-cloud/nodejs-repo-tools": "^2.3.0"
+    },
+    "cloud-repo-tools": {
+        "test": {
+            "app": {
+                "msg": "Hello, world!"
+            }
+        },
+        "requiresKeyFile": true,
+        "requiresProjectId": true
+    }
 }
